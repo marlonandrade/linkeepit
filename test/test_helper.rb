@@ -18,4 +18,9 @@ end
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
   include TestHelpers::SessionHelper
+
+  def teardown
+    Capybara.reset_sessions!
+    Capybara.use_default_driver
+  end
 end
