@@ -6,4 +6,4 @@
 #
 homer:
   email: homer@simpson.com
-  encrypted_password: <%= Devise.bcrypt(User, 'donut')
+  encrypted_password: <%= Devise.bcrypt(User, 'homer') %>

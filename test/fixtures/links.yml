@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-google:
-  url: http://google.com
+duff:
+  url: http://www.duff-beer.com
 
-linkeepit:
-  url: http://www.linkeep.it
+springfield:
+  url: http://www.springfield-ma.gov
+
+google:
+  url: http://www.google.com
