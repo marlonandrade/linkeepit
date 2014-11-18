@@ -4,7 +4,7 @@ class LinksController < ApplicationController
   respond_to :html
 
   def index
-    @links = Link.all
+    @links = current_user.links
     respond_with(@links)
   end
 
@@ -22,6 +22,7 @@ class LinksController < ApplicationController
 
   def create
     @link = Link.new(link_params)
+    @link.user = current_user
     @link.save
     respond_with(@link)
   end
@@ -37,11 +38,11 @@ class LinksController < ApplicationController
   end
 
   private
-    def set_link
-      @link = Link.find(params[:id])
-    end
+  def set_link
+    @link = current_user.links.find params[:id]
+  end
 
-    def link_params
-      params.require(:link).permit(:url)
-    end
+  def link_params
+    params.require(:link).permit(:url)
+  end
 end

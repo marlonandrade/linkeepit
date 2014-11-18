@@ -7,3 +7,7 @@
 homer:
   email: homer@simpson.com
   encrypted_password: <%= Devise.bcrypt(User, 'homer') %>
+
+apu:
+  email: apu@simpson.com
+  encrypted_password: <%= Devise.bcrypt(User, 'apu') %>

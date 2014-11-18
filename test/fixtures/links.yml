@@ -2,9 +2,12 @@
 
 duff:
   url: http://www.duff-beer.com
+  user: homer
 
 springfield:
   url: http://www.springfield-ma.gov
+  user: homer
 
 google:
   url: http://www.google.com
+  user: apu
