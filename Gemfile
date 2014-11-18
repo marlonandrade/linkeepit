@@ -53,3 +53,6 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
+group :test do
+  gem 'capybara'
+end
