@@ -3,6 +3,7 @@ require 'test_helper'
 class LinksControllerTest < ActionController::TestCase
   setup do
     @link = links(:one)
+    sign_in :user, users(:homer)
   end
 
   test "should get index" do
