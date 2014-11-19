@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :links
+  resources :links, only: [:index, :create, :update, :destroy]
 
   devise_for :users
 

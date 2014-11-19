@@ -1,23 +1,13 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: [:show, :edit, :update, :destroy]
+
+  before_action :set_link, only: [:update, :destroy]
 
   respond_to :html
 
   def index
     @links = current_user.links
+    @new_link = Link.new
     respond_with(@links)
-  end
-
-  def show
-    respond_with(@link)
-  end
-
-  def new
-    @link = Link.new
-    respond_with(@link)
-  end
-
-  def edit
   end
 
   def create

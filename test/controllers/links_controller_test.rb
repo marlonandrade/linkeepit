@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class LinksControllerTest < ActionController::TestCase
+
   setup do
     @link = links(:duff)
     sign_in :user, users(:homer)
@@ -19,9 +20,10 @@ class LinksControllerTest < ActionController::TestCase
     assert assigns(:links).count, 2
   end
 
-  test 'should get new' do
-    get :new
+  test 'should get index with new link' do
+    get :index
     assert_response :success
+    assert_not_nil assigns(:new_link)
   end
 
   test 'should create link belonging to current_user' do
@@ -33,28 +35,6 @@ class LinksControllerTest < ActionController::TestCase
 
     assert_equal assigns(:link).user, users(:homer)
     assert_redirected_to link_path(assigns(:link))
-  end
-
-  test 'should show link belonging to user' do
-    get :show, id: @link
-    assert_response :success
-  end
-
-  test 'should not show link belonging to other user' do
-    assert_raise ActiveRecord::RecordNotFound do
-      get :show, id: links(:google)
-    end
-  end
-
-  test 'should get edit' do
-    get :edit, id: @link
-    assert_response :success
-  end
-
-  test 'should not edit link belonging to other user' do
-    assert_raise ActiveRecord::RecordNotFound do
-      get :edit, id: links(:google)
-    end
   end
 
   test 'should update link' do
