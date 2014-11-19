@@ -13,7 +13,9 @@
   <tbody>
     <% @links.each do |link| %>
       <tr>
-        <td><%= link.url %></td>
+        <td>
+          <%= link_to link.url, link.url, target: '_blank' %>
+        </td>
         <td><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

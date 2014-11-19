@@ -30,4 +30,11 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert has_content?('krusty-burger')
     assert has_selector? 'tr', 3
   end
+
+  test 'should allow to click a link' do
+    link = find_link 'http://www.duff-beer.com'
+
+    assert_equal link[:href], 'http://www.duff-beer.com'
+    assert_equal link[:target], '_blank'
+  end
 end
