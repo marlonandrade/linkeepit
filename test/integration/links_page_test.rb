@@ -21,12 +21,12 @@ class LinksPageTest < ActionDispatch::IntegrationTest
   end
 
   test 'should allow to add a new link' do
-    fill_in 'Url', with: 'http://krusty-burger.com'
+    fill_in 'url', with: 'http://krusty-burger.com'
     click_button 'Create Link'
 
     assert_equal current_path, links_path
 
-    assert_equal find_field('Url').value, nil
+    assert_equal find_field('url').value, nil
     assert has_content?('krusty-burger')
     assert has_selector? 'tr', 3
   end
