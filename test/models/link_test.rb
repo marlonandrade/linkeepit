@@ -1,12 +1,14 @@
 require 'test_helper'
 
 class LinkTest < ActiveSupport::TestCase
+
   setup do
     @link = Link.new(
       url: 'http://kwik-e-mart.com',
       user: users(:apu)
     )
   end
+
   test 'should not save link without url' do
     @link.url = nil;
     assert_not @link.save, 'saved link without url'
