@@ -14,7 +14,7 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     @link.user = current_user
     @link.save
-    respond_with(@link)
+    redirect_to links_path
   end
 
   def update

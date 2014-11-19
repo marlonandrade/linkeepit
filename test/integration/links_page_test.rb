@@ -19,4 +19,15 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert has_no_content?('google'),
       'page has google link'
   end
+
+  test 'should allow to add a new link' do
+    fill_in 'Url', with: 'http://krusty-burger.com'
+    click_button 'Create Link'
+
+    assert_equal current_path, links_path
+
+    assert_equal find_field('Url').value, nil
+    assert has_content?('krusty-burger')
+    assert has_selector? 'tr', 3
+  end
 end

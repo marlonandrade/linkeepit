@@ -34,7 +34,7 @@ class LinksControllerTest < ActionController::TestCase
     end
 
     assert_equal assigns(:link).user, users(:homer)
-    assert_redirected_to link_path(assigns(:link))
+    assert_redirected_to links_path
   end
 
   test 'should update link' do
