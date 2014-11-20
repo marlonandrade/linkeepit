@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+beer_duff_homer:
+  tag: beer
+  link: duff
+  user: homer
+
+beer_duff_apu:
+  tag: beer
+  link: duff
+  user: apu
+
+city_springfield_homer:
+  tag: cities
+  link: springfield
+  user: homer
