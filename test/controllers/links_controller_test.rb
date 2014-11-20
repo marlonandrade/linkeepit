@@ -37,6 +37,13 @@ class LinksControllerTest < ActionController::TestCase
     assert_redirected_to links_path
   end
 
+  test 'should render index when fail to create' do
+    post :create, link: { url: nil }
+    assert_template :index
+    assert_not_nil assigns(:links)
+    assert_not_nil assigns(:new_link)
+  end
+
   test 'should update link' do
     patch :update, id: @link, link: {
       url: @link.url 

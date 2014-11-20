@@ -5,16 +5,19 @@ class LinksController < ApplicationController
   respond_to :html
 
   def index
-    @links = current_user.links
-    @new_link = Link.new
+    index_instance_variables
     respond_with(@links)
   end
 
   def create
     @link = Link.new(link_params)
     @link.user = current_user
-    @link.save
-    redirect_to links_path
+    if @link.save
+      redirect_to links_path
+    else
+      index_instance_variables
+      render :index
+    end
   end
 
   def update
@@ -35,4 +38,10 @@ class LinksController < ApplicationController
   def link_params
     params.require(:link).permit(:url)
   end
+
+  def index_instance_variables
+    @links = current_user.links
+    @new_link = Link.new
+  end
+
 end
