@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class LinksControllerTest < ActionController::TestCase
-
   setup do
     @link = links(:duff)
     sign_in :user, users(:homer)
@@ -27,7 +26,7 @@ class LinksControllerTest < ActionController::TestCase
   end
 
   test 'should create link belonging to current_user' do
-    assert_difference('Link.count') do
+    assert_difference 'Link.count' do
       post :create, link: { 
         url: 'http://g1.globo.com'
       }
@@ -60,7 +59,7 @@ class LinksControllerTest < ActionController::TestCase
   end
 
   test 'should destroy link' do
-    assert_difference('Link.count', -1) do
+    assert_difference 'Link.count', -1 do
       delete :destroy, id: @link
     end
 

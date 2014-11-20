@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class LinkTest < ActiveSupport::TestCase
-
   setup do
     @link = Link.new(
       url: 'http://kwik-e-mart.com',
