@@ -36,4 +36,23 @@ class LinkTest < ActiveSupport::TestCase
     assert @link.save, 'didnt save link with tags'
     assert_equal @link.tags.count, 2
   end
+
+  test 'a new link defaults to false' do
+    link = Link.create url: 'http://matt-groening.com'
+    assert_not link.read?
+  end
+
+  test 'links can be filtered by read status' do
+    chars = ['homer', 'bart', 'marge', 'lisa']
+    chars.each do |char|
+      Link.create(
+        url: "http://www.simpsons.com/#{char}",
+        read: true,
+        user: users(:homer)
+      )
+    end
+
+    assert_equal 5, Link.read.count
+    assert_equal 2, Link.unread.count
+  end
 end

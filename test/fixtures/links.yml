@@ -11,3 +11,4 @@ springfield:
 google:
   url: http://www.google.com
   user: apu
+  read: true

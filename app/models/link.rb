@@ -8,6 +8,9 @@ class Link < ActiveRecord::Base
 
   before_validation :set_user_for_tagging
 
+  scope :read,   -> { where read: true }
+  scope :unread, -> { where read: false }
+
   private
   def set_user_for_tagging
     taggings.each do |tagging|
