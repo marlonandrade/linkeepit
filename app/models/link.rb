@@ -11,6 +11,10 @@ class Link < ActiveRecord::Base
   scope :read,   -> { where read: true }
   scope :unread, -> { where read: false }
 
+  def unread?
+    !read?
+  end
+
   private
   def set_user_for_tagging
     taggings.each do |tagging|

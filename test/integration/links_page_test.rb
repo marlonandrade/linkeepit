@@ -35,6 +35,8 @@ class LinksPageTest < ActionDispatch::IntegrationTest
   end
 
   test 'should allow to show all links' do
+    visit links_path(read: true)
+
     click_link 'all'
 
     assert has_selector?('.link', count: 3)
@@ -60,4 +62,21 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert_equal link[:href], 'http://www.duff-beer.com'
     assert_equal link[:target], '_blank'
   end
+
+  test 'should allow to mark unread' do
+    link = find('.link', text: 'http://www.duff-beer.com')
+    link.click_link 'mark unread'
+
+    link = find('.link', text: 'http://www.duff-beer.com')
+    assert link.has_no_content? 'mark unread'
+  end
+
+  test 'should allow to mark read' do
+    link = find('.link', text: 'http://www.springfield-ma.gov')
+    link.click_link 'mark read'
+
+    link = find('.link', text: 'http://www.springfield-ma.gov')
+    assert link.has_no_content? 'mark read'
+  end
+
 end

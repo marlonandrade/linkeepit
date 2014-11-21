@@ -59,7 +59,31 @@ class LinksControllerTest < ActionController::TestCase
     patch :update, id: @link, link: {
       url: @link.url 
     }
-    assert_redirected_to link_path(assigns(:link))
+    assert_redirected_to links_path
+  end
+
+  test 'should mark link as read' do
+    patch :update, id: @link, link: {
+      read: 'false'
+    }
+
+    link = assigns :link
+
+    assert_not link.read?
+    assert_equal link.url, 'http://www.duff-beer.com'
+    assert_redirected_to links_path
+  end
+
+  test 'should mark link as unread' do
+    patch :update, id: links(:springfield), link: {
+      read: 'true'
+    }
+
+    link = assigns :link
+
+    assert link.read?
+    assert_equal link.url, 'http://www.springfield-ma.gov'
+    assert_redirected_to links_path
   end
 
   test 'should not update link belonging to other user' do

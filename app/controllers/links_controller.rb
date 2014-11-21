@@ -22,7 +22,7 @@ class LinksController < ApplicationController
 
   def update
     @link.update link_params
-    respond_with @link
+    redirect_to links_path
   end
 
   def destroy
@@ -36,7 +36,7 @@ class LinksController < ApplicationController
   end
 
   def link_params
-    params.require(:link).permit :url
+    params.require(:link).permit :url, :read
   end
 
   def index_instance_variables
