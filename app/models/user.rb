@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :links
+  has_many :taggings, -> { readonly }
+  has_many :tags, through: :taggings
 end

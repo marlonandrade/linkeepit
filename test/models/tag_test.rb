@@ -9,4 +9,18 @@ class TagTest < ActiveSupport::TestCase
     @tag.name = nil;
     assert_not @tag.save, 'saved tag without name'
   end
+
+  test 'should allow to add links to tag' do
+    @tag.links << Link.new(
+      url: 'http://www.moes-bar.com',
+      user: users(:homer)
+    )
+    @tag.links << Link.new(
+      url: 'http://www.moes-bar.com',
+      user: users(:apu)
+    )
+
+    assert @tag.save, 'didnt save tag with links'
+    assert_equal @tag.links.count, 2
+  end
 end

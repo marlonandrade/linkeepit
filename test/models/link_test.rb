@@ -28,4 +28,12 @@ class LinkTest < ActiveSupport::TestCase
     @link.user = nil
     assert_not @link.save, 'saved link without user'
   end
+
+  test 'should allow to add tags to link' do
+    @link.tags << Tag.new(name: 'market')
+    @link.tags << Tag.new(name: 'store')
+
+    assert @link.save, 'didnt save link with tags'
+    assert_equal @link.tags.count, 2
+  end
 end
