@@ -1,5 +1,11 @@
 <h1>All Links</h1>
 
+<span class='filter'>
+  <%= link_to_if params[:read].present?, 'all', links_path %> |
+  <%= link_to_if params[:read] != 'true', 'read', links_path(read: true) %> |
+  <%= link_to_if params[:read] != 'false', 'unread', links_path(read: false) %>
+</span>
+
 <%= render 'form', link: @new_link %>
 
 <table>
@@ -12,7 +18,7 @@
 
   <tbody>
     <% @links.each do |link| %>
-      <tr>
+      <tr class='link'>
         <td>
           <%= link_to link.url, link.url, target: '_blank' %>
         </td>

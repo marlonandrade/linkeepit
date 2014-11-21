@@ -16,7 +16,19 @@ class LinksControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:links)
-    assert assigns(:links).count, 2
+    assert_equal assigns(:links).count, 3
+  end
+
+  test 'should get index with only unread links' do
+    get :index, read: 'false'
+    assert_response :success
+    assert_equal assigns(:links).count, 1
+  end
+
+  test 'should get index with only read links' do
+    get :index, read: 'true'
+    assert_response :success
+    assert_equal assigns(:links).count, 2
   end
 
   test 'should get index with new link' do

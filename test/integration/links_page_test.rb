@@ -7,17 +7,40 @@ class LinksPageTest < ActionDispatch::IntegrationTest
   end
 
   test 'should have a list of links' do
-    assert has_content?('All Links'), 
-      'page doesnt have a All Links title'
+    assert has_content?('All Links')
   end
 
   test 'should show only links for signed in user' do
-    assert has_content?('duff-beer'),
-      'page doesnt have duff beer link'
-    assert has_content?('springfield'),
-      'page doesnt have springfield city link'
-    assert has_no_content?('google'),
-      'page has google link'
+    assert has_selector?('.link', count: 3)
+    assert has_content?('duff-beer')
+    assert has_content?('fostersbeer')
+    assert has_content?('springfield')
+    assert has_no_content?('google')
+  end
+
+  test 'should allow to show only unread links' do
+    click_link 'unread'
+
+    assert has_selector?('.link', count: 1)
+    assert has_content?('springfield')
+    assert has_no_content?('duff-beer')
+  end
+
+  test 'should allow to show only read links' do
+    click_link 'read'
+
+    assert has_selector?('.link', count: 2)
+    assert has_content?('duff-beer')
+    assert has_no_content?('springfield')
+  end
+
+  test 'should allow to show all links' do
+    click_link 'all'
+
+    assert has_selector?('.link', count: 3)
+    assert has_content?('duff-beer')
+    assert has_content?('fostersbeer')
+    assert has_content?('springfield')
   end
 
   test 'should allow to add a new link' do
@@ -28,7 +51,7 @@ class LinksPageTest < ActionDispatch::IntegrationTest
 
     assert_equal find_field('url').value, nil
     assert has_content?('krusty-burger')
-    assert has_selector? 'tr', 3
+    assert has_selector?('.link', count: 4)
   end
 
   test 'should allow to click a link' do

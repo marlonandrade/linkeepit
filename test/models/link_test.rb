@@ -52,7 +52,7 @@ class LinkTest < ActiveSupport::TestCase
       )
     end
 
-    assert_equal 5, Link.read.count
+    assert_equal 6, Link.read.count
     assert_equal 2, Link.unread.count
   end
 end

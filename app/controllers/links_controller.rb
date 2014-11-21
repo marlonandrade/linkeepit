@@ -41,6 +41,14 @@ class LinksController < ApplicationController
 
   def index_instance_variables
     @links = current_user.links
+    if params[:read].present?
+      @links = if params[:read] =~ /true/
+                 @links.read
+               else
+                 @links.unread
+               end
+    end
+
     @new_link = Link.new
   end
 end

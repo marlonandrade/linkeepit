@@ -3,6 +3,12 @@
 duff:
   url: http://www.duff-beer.com
   user: homer
+  read: true
+
+foster:
+  url: http://www.fostersbeer.com
+  user: homer
+  read: true
 
 springfield:
   url: http://www.springfield-ma.gov
@@ -11,4 +17,3 @@ springfield:
 google:
   url: http://www.google.com
   user: apu
-  read: true
