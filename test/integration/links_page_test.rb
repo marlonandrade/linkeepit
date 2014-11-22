@@ -6,11 +6,11 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     sign_in users(:homer)
   end
 
-  test 'should have a list of links' do
+  test 'it has a list of links' do
     assert has_content?('All Links')
   end
 
-  test 'should show only links for signed in user' do
+  test 'it shows only links for signed in user' do
     assert has_selector?('.link', count: 3)
     assert has_content?('duff-beer')
     assert has_content?('fostersbeer')
@@ -18,7 +18,7 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert has_no_content?('google')
   end
 
-  test 'should allow to show only unread links' do
+  test 'it can show only unread links' do
     click_link 'unread'
 
     assert has_selector?('.link', count: 1)
@@ -26,7 +26,7 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert has_no_content?('duff-beer')
   end
 
-  test 'should allow to show only read links' do
+  test 'it can show only read links' do
     click_link 'read'
 
     assert has_selector?('.link', count: 2)
@@ -34,7 +34,7 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert has_no_content?('springfield')
   end
 
-  test 'should allow to show all links' do
+  test 'it can show all links' do
     visit links_path(read: true)
 
     click_link 'all'
@@ -45,7 +45,7 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert has_content?('springfield')
   end
 
-  test 'should allow to add a new link' do
+  test 'it allows to add a new link' do
     fill_in 'url', with: 'http://krusty-burger.com'
     click_button 'Create Link'
 
@@ -56,14 +56,14 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert has_selector?('.link', count: 4)
   end
 
-  test 'should allow to click a link' do
+  test 'it allows to click a link' do
     link = find_link 'http://www.duff-beer.com'
 
     assert_equal link[:href], 'http://www.duff-beer.com'
     assert_equal link[:target], '_blank'
   end
 
-  test 'should allow to mark unread' do
+  test 'it allows to mark as unread' do
     link = find('.link', text: 'http://www.duff-beer.com')
     link.click_link 'mark unread'
 
@@ -71,7 +71,7 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     assert link.has_no_content? 'mark unread'
   end
 
-  test 'should allow to mark read' do
+  test 'it allows to mark as read' do
     link = find('.link', text: 'http://www.springfield-ma.gov')
     link.click_link 'mark read'
 
