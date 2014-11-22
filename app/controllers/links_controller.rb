@@ -10,7 +10,7 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.new link_params
+    @link = LinkBuilder.new.build link_params
     @link.user = current_user
     if @link.save
       redirect_to links_path

@@ -1,7 +1,7 @@
 class LinkBuilder
   def build(params)
-    url = params[:url]
-    tags = url.scan /#\S*/
+    url = params[:url] || ''
+    tags = url.scan(/#\S*/)
 
     Link.new(
       url: url_for(url),

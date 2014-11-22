@@ -21,6 +21,11 @@
       <tr class='link'>
         <td>
           <%= link_to link.url, link.url, target: '_blank' %>
+          <ul class='tags'>
+            <% link.tags.each do |tag| %>
+              <li><%= "##{tag.name}" %></li>
+            <% end %>
+          </ul>
         </td>
         <td>
           <%= link_to_toggle_read link %>

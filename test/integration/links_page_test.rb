@@ -64,19 +64,54 @@ class LinksPageTest < ActionDispatch::IntegrationTest
   end
 
   test 'it allows to mark as unread' do
-    link = find('.link', text: 'http://www.duff-beer.com')
+    link = find('.link', text: 'duff')
     link.click_link 'mark unread'
 
-    link = find('.link', text: 'http://www.duff-beer.com')
+    link = find('.link', text: 'duff')
     assert link.has_no_content? 'mark unread'
   end
 
   test 'it allows to mark as read' do
-    link = find('.link', text: 'http://www.springfield-ma.gov')
+    link = find('.link', text: 'springfield')
     link.click_link 'mark read'
 
-    link = find('.link', text: 'http://www.springfield-ma.gov')
+    link = find('.link', text: 'springfield')
     assert link.has_no_content? 'mark read'
+  end
+
+  test 'it show tags for each link' do
+    city_link = find('.link', text: 'springfield')
+    city_tags = city_link.find('.tags')
+
+    assert city_tags.has_content? '#cities'
+    assert city_tags.has_no_content? '#beer'
+
+    duff_link = find('.link', text: 'duff')
+    duff_tags = duff_link.find('.tags')
+
+    assert duff_tags.has_content? '#beer'
+    assert duff_tags.has_content? '#moes-bar'
+    assert duff_tags.has_no_content? '#cities'
+
+    foster_link = find('.link', text: 'foster')
+    foster_tags = foster_link.find('.tags')
+
+    assert_equal '', foster_tags.text
+  end
+
+  test 'it allows to add a new link with tags' do
+    fill_in 'url', with: 'http://krusty-burger.com #burger #krusty #tasty #potatoes'
+    click_button 'Create Link'
+
+    assert_equal current_path, links_path
+
+    krusty_link = find('.link', text: 'krusty')
+    krusty_tags = krusty_link.find('.tags')
+
+    assert krusty_tags.has_content? '#burger'
+    assert krusty_tags.has_content? '#krusty'
+    assert krusty_tags.has_content? '#tasty'
+    assert krusty_tags.has_content? '#potatoes'
   end
 
 end

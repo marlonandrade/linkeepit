@@ -88,4 +88,16 @@ class LinkBuilderTest < ActiveSupport::TestCase
     assert tag_names.include? 'moes'
     assert tag_names.include? 'good'
   end
+
+  test 'should deal with nil urls' do
+    params = {
+      url: nil
+    }
+
+    link = @builder.build params
+
+    assert_not_nil link
+    assert_equal '', link.url
+    assert_equal [], link.tags
+  end
 end

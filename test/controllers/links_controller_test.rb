@@ -40,11 +40,24 @@ class LinksControllerTest < ActionController::TestCase
   test 'should create link belonging to current_user' do
     assert_difference 'Link.count' do
       post :create, link: { 
-        url: 'http://g1.globo.com'
+        url: 'http://www.spider-pig.com'
       }
     end
 
     assert_equal assigns(:link).user, users(:homer)
+    assert_redirected_to links_path
+  end
+
+  test 'should create link with tags' do
+    assert_difference 'Link.count', 1 do
+      assert_difference 'Tag.count', 3 do
+        post :create, link: {
+          url: 'http://www.harry-plopper.com #pig #spider-pig #pet'
+        }
+      end
+    end
+
+    assert_equal 3, assigns(:link).tags.count
     assert_redirected_to links_path
   end
 

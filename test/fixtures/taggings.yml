@@ -4,6 +4,10 @@ duff_beer:
   link: duff
   tag: beer
 
+duff_moes:
+  link: duff
+  tag: moes
+
 springfield_city:
   link: springfield
   tag: cities
