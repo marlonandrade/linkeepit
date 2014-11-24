@@ -72,4 +72,29 @@ class LinkTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test 'deleting link should destroy tagging, but not the tag' do
+    # link tagged once
+    assert_difference ['Link.count', 'Tagging.count'], -1 do
+      assert_no_difference 'Tag.count' do
+        links(:springfield).destroy
+      end
+    end
+
+    # link tagged twice
+    assert_difference 'Link.count', -1 do
+      assert_difference 'Tagging.count', -2 do
+        assert_no_difference 'Tag.count' do
+          links(:duff).destroy
+        end
+      end
+    end
+
+    # link with no taggings
+    assert_difference 'Link.count', -1 do
+      assert_no_difference ['Tagging.count', 'Tag.count'] do
+        links(:foster).destroy
+      end
+    end
+  end
 end
