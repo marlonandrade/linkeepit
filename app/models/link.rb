@@ -9,7 +9,16 @@ class Link < ActiveRecord::Base
   scope :read,   -> { where read: true }
   scope :unread, -> { where read: false }
 
+  before_validation :use_existing_tags
+
   def unread?
     !read?
+  end
+
+  private
+  def use_existing_tags
+    self.tags = self.tags.map do |tag|
+      Tag.find_or_create_by name: tag.name
+    end
   end
 end

@@ -10,6 +10,11 @@ class TagTest < ActiveSupport::TestCase
     assert_not @tag.save, 'saved tag without name'
   end
 
+  test 'should not save tag with duplicate name' do
+    @tag.name = tags(:beer).name
+    assert_not @tag.save, 'saved tag with duplicate name'
+  end
+
   test 'should allow to add links to tag' do
     @tag.links << Link.new(
       url: 'http://www.moes-bar.com',

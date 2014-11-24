@@ -55,4 +55,21 @@ class LinkTest < ActiveSupport::TestCase
     assert_equal 6, Link.read.count
     assert_equal 2, Link.unread.count
   end
+
+  test 'creating two links with same tag should not create two tags' do
+    assert_difference 'Link.count', 2 do
+      assert_difference 'Tag.count', 1 do
+        Link.create(
+          url: 'http://link1.com',
+          user: users(:homer),
+          tags: [Tag.new(name: 'tag#1')]
+        )
+        Link.create(
+          url: 'http://link2.com',
+          user: users(:homer),
+          tags: [Tag.new(name: 'tag#1')]
+        )
+      end
+    end
+  end
 end
