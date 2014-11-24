@@ -3,6 +3,7 @@ class Link < ActiveRecord::Base
   validates :url, uniqueness: { scope: :user }
 
   belongs_to :user
+
   has_many :taggings
   has_many :tags, through: :taggings
 
@@ -17,6 +18,7 @@ class Link < ActiveRecord::Base
 
   private
   def use_existing_tags
+    self.taggings = []
     self.tags = self.tags.map do |tag|
       Tag.find_or_create_by name: tag.name
     end
