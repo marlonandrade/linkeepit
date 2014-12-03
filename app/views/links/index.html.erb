@@ -23,7 +23,7 @@
           <%= link_to link.url, link.url, target: '_blank' %>
           <ul class='tags'>
             <% link.tags.each do |tag| %>
-              <li><%= "##{tag.name}" %></li>
+              <li><%= tag.name %></li>
             <% end %>
           </ul>
         </td>
