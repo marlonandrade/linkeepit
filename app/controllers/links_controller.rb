@@ -40,7 +40,7 @@ class LinksController < ApplicationController
   end
 
   def index_instance_variables
-    @links = current_user.links
+    @links = current_user.links.includes(:tags)
     if params[:read].present?
       @links = if params[:read] =~ /true/
                  @links.read
