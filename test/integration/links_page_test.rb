@@ -83,15 +83,15 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     city_link = find('.link', text: 'springfield')
     city_tags = city_link.find('.tags')
 
-    assert city_tags.has_content? '#cities'
-    assert city_tags.has_no_content? '#beer'
+    assert city_tags.has_content? 'cities'
+    assert city_tags.has_no_content? 'beer'
 
     duff_link = find('.link', text: 'duff')
     duff_tags = duff_link.find('.tags')
 
-    assert duff_tags.has_content? '#beer'
-    assert duff_tags.has_content? '#moes-bar'
-    assert duff_tags.has_no_content? '#cities'
+    assert duff_tags.has_content? 'beer'
+    assert duff_tags.has_content? 'moes-bar'
+    assert duff_tags.has_no_content? 'cities'
 
     foster_link = find('.link', text: 'foster')
     foster_tags = foster_link.find('.tags')
@@ -108,10 +108,10 @@ class LinksPageTest < ActionDispatch::IntegrationTest
     krusty_link = find('.link', text: 'krusty')
     krusty_tags = krusty_link.find('.tags')
 
-    assert krusty_tags.has_content? '#burger'
-    assert krusty_tags.has_content? '#krusty'
-    assert krusty_tags.has_content? '#tasty'
-    assert krusty_tags.has_content? '#potatoes'
+    assert krusty_tags.has_content? 'burger'
+    assert krusty_tags.has_content? 'krusty'
+    assert krusty_tags.has_content? 'tasty'
+    assert krusty_tags.has_content? 'potatoes'
   end
 
 end
