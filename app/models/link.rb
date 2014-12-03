@@ -10,6 +10,8 @@ class Link < ActiveRecord::Base
   scope :read,   -> { where read: true }
   scope :unread, -> { where read: false }
 
+  default_scope -> { order created_at: :desc }
+
   before_validation :use_existing_tags
 
   def unread?
