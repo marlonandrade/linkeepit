@@ -39,6 +39,18 @@ class LinkBuilderTest < ActiveSupport::TestCase
     assert link.tags.map(&:name).include? 'beer'
   end
 
+  test 'should allow anchor like #xxx on url' do
+    params = {
+      url: 'http://duff-beer.com#contact'
+    }
+
+    link = @builder.build params
+    
+    assert_not_nil link
+    assert_equal 'http://duff-beer.com#contact', link.url
+    assert_empty link.tags
+  end
+
   test 'should get multiple tags from url' do
     params = {
       url: 'http://duff-beer.com #beer #burp #moes'
@@ -54,6 +66,22 @@ class LinkBuilderTest < ActiveSupport::TestCase
     assert tag_names.include? 'beer'
     assert tag_names.include? 'burp'
     assert tag_names.include? 'moes'
+  end
+
+  test 'should allow to have tags and #xxx for anchor on url' do
+    params = {
+      url: 'http://duff-beer.com#contact #beer #buy'
+    }
+
+    link = @builder.build params
+
+    assert_not_nil link
+    assert_equal 'http://duff-beer.com#contact', link.url
+    assert_equal 2, link.tags.length
+
+    tag_names = link.tags.map &:name
+    assert tag_names.include? 'beer'
+    assert tag_names.include? 'buy'
   end
 
   test 'should get tags even if it has dots' do

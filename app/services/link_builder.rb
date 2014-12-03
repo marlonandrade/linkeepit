@@ -1,7 +1,9 @@
 class LinkBuilder
+  TAGS_REGEX = /(\W|\A)(#\S*)/
+
   def build(params)
     url = params[:url] || ''
-    tags = url.scan(/#\S*/)
+    tags = url.scan(TAGS_REGEX).map { |m| m.last }
 
     Link.new(
       url: url_for(url),
@@ -11,7 +13,7 @@ class LinkBuilder
 
   private
   def url_for(url)
-    url.gsub(/#\S*/, '').strip
+    url.gsub(TAGS_REGEX, '').strip
   end
 
   def tags_for(tags)
