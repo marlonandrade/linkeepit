@@ -12,7 +12,7 @@ class Link < ActiveRecord::Base
 
   default_scope -> { order created_at: :desc }
 
-  before_validation :use_existing_tags
+  before_validation :use_existing_tags, on: :create
 
   def unread?
     !read?

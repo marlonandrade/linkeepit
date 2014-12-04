@@ -99,6 +99,16 @@ class LinksControllerTest < ActionController::TestCase
     assert_redirected_to links_path
   end
 
+  test 'marking a link as read should not remove tags' do
+    link = links :springfield
+
+    assert_no_difference -> { link.tags.count } do
+      patch :update, id: link, link: {
+        read: 'true'
+      }
+    end
+  end
+
   test 'should not update link belonging to other user' do
     assert_raise ActiveRecord::RecordNotFound do
       patch :update, id: links(:google), link: {
